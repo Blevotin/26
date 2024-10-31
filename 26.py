@@ -1,13 +1,24 @@
+
 import os
 import time
-# for i in os.walk('.'):
-#     #print(i)
-a = os.path.join("dimad\PycharmProjects\pythonProject4\.venv\Lib", "1.txt")
-print(a)
-a = os.path.getmtime("1.txt")
-a = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(a))
-print(a)
-a = os.path.getsize("1.txt")
-print(a)
-a = os.path.dirname(r"dimad\PycharmProjects\pythonProject4\.venv\Lib\1.txt")
-print(a)
+
+# Установим directory в текущую директорию для тестирования
+directory = "."
+
+for root, dirs, files in os.walk(directory):
+    for file in files:
+        # Полный путь к файлу
+        filepath = os.path.join(root, file)
+        
+        # Время последнего изменения файла
+        filetime = os.path.getmtime(filepath)
+        formatted_time = time.strftime("%d.%m.%Y %H:%M", time.localtime(filetime))
+        
+        # Размер файла
+        filesize = os.path.getsize(filepath)
+        
+        # Родительская директория
+        parent_dir = os.path.dirname(filepath)
+        
+        # Вывод информации о файле
+        print(f'Обнаружен файл: {file}, Путь: {filepath}, Размер: {filesize} байт, Время изменения: {formatted_time}, Родительская директория: {parent_dir}')
